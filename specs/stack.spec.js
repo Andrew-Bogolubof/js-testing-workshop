@@ -21,13 +21,26 @@ describe('stack', function() {
         });
     });
 
+    describe('size', function() {
+        it('should return current amount of elements in stack', function() {
+            var size = 3;
+            var data = [1, 2, 3];
+            var stack = new Stack(3);
+            stack.push(...data);
+
+            var result = stack.size();
+
+            assert(result === size, `Should return ${size}, but actual ${result}.`);
+        });
+    })
+
     describe('push', function() {
         it('should add elements to the stack', function() {
             var data = 1;
             var size = 1;
             var stack = new Stack(size);
             stack.push(data);
-            var actualSize = stack.size;
+            var actualSize = stack.size();
 
             assert(actualSize === size, `Should return ${size}, but actual ${actualSize}.`);
         });
@@ -37,9 +50,22 @@ describe('stack', function() {
             var data = new Array(1000).fill(0);
             var stack = new Stack(size);
             stack.push(...data);
-            var actualSize = stack.size;
+            var actualSize = stack.size();
 
             assert(actualSize === size, `Should return ${size}, but actual ${actualSize}.`); 
+        });
+
+        it('should not add new elements if stack size is alreasy exceeded', function() {
+            var size = 3;
+            var data = [1, 2];
+            var additionData = [3, 4];
+            var expected = [1, 2, 3];
+            var stack = new Stack(size);
+            stack.push(...data);
+            stack.push(...additionData);
+            var result = stack.pop(stack.size());
+
+            assert.deepEqual(result, expected, `Should be in stack after exceeding of size ${expected}, but actual ${result}.`); 
         });
     });
 
@@ -69,6 +95,18 @@ describe('stack', function() {
             var result = stack.pop();
 
             assert(result === null, `Should return null, but actual ${result}.`);
+        });
+
+        it('should delete elemets from stack after pop', function() {
+            var size = 4;
+            var data = [1, 2, 3, 4];
+            var expected = [1, 2];
+            var stack = new Stack(size);
+            stack.push(...data);
+            stack.pop(size / 2);
+            result = stack.pop(size / 2);
+
+            assert(result === expected, `Should be in stack after pop - ${expected}, but actual ${result}.`);
         });
     });
 

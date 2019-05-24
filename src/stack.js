@@ -17,6 +17,10 @@ class Stack {
     top() {
 
     }
+
+    size() {
+        
+    }
 }
 
 module.exports = Stack;
