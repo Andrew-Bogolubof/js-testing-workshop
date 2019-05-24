@@ -2,10 +2,10 @@ class Stack {
     constructor(size) {
 
     }
-    static merge() {
+    merge() {
 
     }
-    
+
     push() {
 
     }
